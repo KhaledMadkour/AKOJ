@@ -37,7 +37,7 @@ class SubmissionViewSet(generics.ListCreateAPIView):
 
         Accepted = True
         i=0
-        tescases = TestCase.objects.filter(Problem = created_submission.problem )
+        tescases = TestCase.objects.filter(problem = created_submission.problem )
         for testcase in tescases:
             i+=1
             result = compilar.run(testcase.Input, created_submission.problem.Time_limit)
