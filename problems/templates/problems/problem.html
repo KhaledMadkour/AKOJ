@@ -1,0 +1,22 @@
+	{% extends "problems/base.html" %}
+
+{% block header %}
+	<h2 class="font-weight-bold">{{ problem_obj.Problem_Name }} </h2>
+    <p>by : {{ problem_obj.owner }}</p>	 
+    <p >TimeLimit : {{ problem_obj.Time_limit }}  , MemoryLimit : {{ problem_obj.Memory_limit }} </p>
+    
+{% endblock header %}
+
+
+{% block content %}
+	    <h3> Statment </h3>
+	    <p>{{ problem_obj.statement }} </p>
+	    {% if problem_obj.owner == user %}
+	    <a
+	        class="btn btn-primary" href="{% url 'problems:test_cases' problem_obj.id %}" role="button">Test Cases
+	    </a>
+	    {% endif%}
+
+
+
+{% endblock content %}

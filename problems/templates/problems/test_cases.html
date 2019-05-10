@@ -1,0 +1,32 @@
+{% extends "problems/base.html" %}
+
+
+{% block header %}
+    <h1>Test Cases</h1>
+{% endblock header %}
+
+{% block content %}
+    
+    <ul>
+        {% for testcase in test_cases %}
+            <li>
+                <h3>
+                    input : {{ testcase.Input}} , output : {{ testcase.Output}}
+                </h3>
+            </li>
+            <p>
+                <form action="{% url 'problems:edit_test_case' testcase.id %}" method="get" target="_self">
+                    <button type="submit">Edit</button>
+                </form>
+            </p>
+        {% empty %}
+            <li> No TestCases have been added yet.</li>
+        {% endfor %}
+    </ul>
+        <a 
+        class="btn btn-primary" href="{% url 'problems:new_test_case' problem_id %}" role="button">Add Test case
+    </a>
+
+    
+    
+{% endblock content %}

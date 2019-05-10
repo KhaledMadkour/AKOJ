@@ -1,10 +1,10 @@
 from rest_framework import viewsets, generics
 
-from .serializers import ProblemSerializer, SubmissionSerializer , TestCaseSerializer
-from .models import Problem, Submission , TestCase
+from ..serializers import ProblemSerializer, SubmissionSerializer , TestCaseSerializer
+from ..models import Problem, Submission , TestCase
 # Create your views here.
 
-from .compilar import Compilar
+from ..compilar import Compilar
 
 class ProblemViewSet(viewsets.ModelViewSet):
     """
@@ -37,10 +37,10 @@ class SubmissionViewSet(generics.ListCreateAPIView):
 
         Accepted = True
         i=0
-        tescases = TestCase.objects.filter(Problem = created_submission.Problem )
+        tescases = TestCase.objects.filter(Problem = created_submission.problem )
         for testcase in tescases:
             i+=1
-            result = compilar.run(testcase.Input, created_submission.Problem.Time_limit)
+            result = compilar.run(testcase.Input, created_submission.problem.Time_limit)
             print("{} on test case :{}".format(compilar.codes[result],i))
             Accepted = Accepted and compilar.match(testcase.Output)
             if Accepted == False:
@@ -64,8 +64,8 @@ class TestCaseViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         created_testcase = serializer.save()
 
-        code_language = created_testcase.Problem.solution_language
-        source_code = created_testcase.Problem.solution
+        code_language = created_testcase.problem.solution_language
+        source_code = created_testcase.problem.solution
 
         compilar = Compilar(source_code, code_language)
 
@@ -73,7 +73,7 @@ class TestCaseViewSet(viewsets.ModelViewSet):
             result = compilar.compile(compilar.file_name)
             print("compilation result : {}".format(compilar.codes[result]))
 
-        result = compilar.run(created_testcase.Input, created_testcase.Problem.Time_limit)
+        result = compilar.run(created_testcase.Input, created_testcase.problem.Time_limit)
         if compilar.codes[result] == 'success':
             created_testcase.Output = open(compilar.program_output, "r").read()
 

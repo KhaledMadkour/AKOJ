@@ -1,0 +1,14 @@
+{% extends "problems/base.html" %}
+{% load render_table from django_tables2 %}
+
+
+{% block header %}
+    <h1>Submissions</h1>
+{% endblock header %}
+
+{% block content %}
+
+{% render_table submission_table %}
+    
+
+{% endblock content %}

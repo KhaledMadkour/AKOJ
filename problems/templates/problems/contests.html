@@ -1,0 +1,23 @@
+{% extends "problems/base.html" %}
+
+
+{% block header %}
+    <h1>Contest</h1>
+{% endblock header %}
+
+{% block content %}
+    
+    <ul>
+        {% for contest in contests %}
+            <li>
+                <h3>   
+                     <a class="nav-link" href="{% url 'problems:contest' contest.id %}">{{ contest}}</a>
+                </h3>
+            </li>
+        {% empty %}
+            <li> No Contests have been added yet.</li>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{% url 'problems:new_contest' %}" role="button">Add new Contest</a>
+    
+{% endblock content %}

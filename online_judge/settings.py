@@ -40,11 +40,16 @@ INSTALLED_APPS = [
 
     #thrid party
     'rest_framework',
+    'crispy_forms',
+    'django_tables2',
 
     #own apps
-    'problems.apps.ProblemsConfig',
+    'users',
+    'problems',
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,3 +130,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# My settings
+LOGIN_URL = '/users/login/'
+# Settings for django-bootstrap3
+BOOTSTRAP3 = {
+    'include_jquery': True,
+    }

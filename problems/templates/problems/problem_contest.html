@@ -1,0 +1,24 @@
+{% extends "problems/base.html" %}
+
+{% block header %}
+	<h2 class="font-weight-bold">{{ problem_contest.problem.Problem_Name }} </h2>
+    <p>by : {{ problem_contest.problem.owner }}</p>	 
+    <p >TimeLimit : {{ problem_contest.problem.Time_limit }}  , MemoryLimit : {{ problem_contest.problem.Memory_limit }} </p>
+    
+{% endblock header %}
+
+
+{% block content %}
+	    <h3> Statment </h3>
+	    <p>{{ problem_contest.problem.statement }} </p>
+	    {% if problem_contest.problem.owner == user %}
+	    <a
+	        class="btn btn-primary" href="{% url 'problems:test_cases' problem_contest.problem.id %}" role="button">Test Cases
+	    </a>
+	    {% endif%}
+	     <a
+	        class="btn btn-primary" href="{% url 'problems:new_submission' contestant.id problem_contest.id  %}" role="button">Submit solution !
+	    </a>
+
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+	{% extends "problems/base.html" %}
+
+{% block header %}
+    <h2>{{ contest.name }}</h2>
+    <p> Duraton : {{ contest.duration }}  , Date : {{ contest.date }}, Time : {{ contest.time }} </p>
+     <h1>problem sets</h1>
+{% endblock header %}
+
+{% block content %}
+    {% if contestant.id%}
+    You are participating!
+     <a 
+        class="btn btn-primary" href="{% url 'problems:submissions' contestant.contest.id %}" role="button">submissions
+    </a>
+    {% else %}
+    Pls participate to submit solutions
+    {% endif %}
+    <ul>
+        {% for problem_contest in problem_set %}
+            <li>
+                <h3>
+                	{{ problem_contest.index }}.
+                    {% if contestant.id%}
+                    
+                     <a href="{% url 'problems:problem_contest' problem_contest.id contestant.id  %}">{{ problem_contest.problem.Problem_Name }} </a>
+                    {% else %}
+                   
+                     <a href="{% url 'problems:problem_view' problem_contest.problem.id %}">{{ problem_contest.problem.Problem_Name }} </a>
+                    {% endif %}
+                   
+                </h3>
+            </li>
+        {% empty %}
+            <li> No problem sets have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+        <a class="btn btn-primary" href="{% url 'problems:new_problem_set' contest.id %}" role="button">Add problem
+        </a>
+        <a class="btn btn-primary" href="{% url 'problems:contestants' contest.id %}" role="button">contestants
+        </a>
+{% endblock content %}

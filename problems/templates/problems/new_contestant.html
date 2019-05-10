@@ -1,0 +1,15 @@
+{% extends "problems/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block header %}
+    <h2>Participate:</h2>
+{% endblock header %}
+
+{% block content %}
+    <form action="{% url 'problems:new_contestant' contest.id %}" method='post'>
+        {% csrf_token %}    
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">join contest</button>
+    </form>
+
+{% endblock content %}

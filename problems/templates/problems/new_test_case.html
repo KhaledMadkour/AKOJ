@@ -1,0 +1,24 @@
+{% extends "problems/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <p><a href="{% url 'problems:problem_view' problem_obj.id %}">{{ problem_obj.Problem_Name }}</a></p>
+    <form action="{% url 'problems:new_test_case' problem_obj.id %}" method='post'>
+        {% csrf_token %}    
+        {{ form|crispy }}
+       <button type="submit" class="btn btn-primary">add test case</button>
+    </form>
+
+    <ul>
+   {% for test_case in test_cases %}
+            <li>
+                <h3>
+                    {{ test_case.Input }} {{ test_case.Ouptut }} 
+                </h3>
+            </li>
+        {% empty %}
+            <li> No test cases have been added yet.</li>
+        {% endfor %}
+
+{% endblock content %}

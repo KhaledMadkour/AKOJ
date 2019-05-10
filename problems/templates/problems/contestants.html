@@ -1,0 +1,27 @@
+{% extends "problems/base.html" %}
+
+{% block header %}
+    <h2>Contestants</h2>
+
+{% endblock header %}
+
+{% block content %}
+    
+    <ul>
+        {% for contestant in contestants %}
+            <li>
+                <h3>
+                  <a href="{% url 'problems:team' contestant.team.id %}">
+                  {{ contestant.team.name }} </a>
+
+                </h3>
+            </li>
+        {% empty %}
+            <li> No contestats have participated yet.</li>
+        {% endfor %}
+    </ul>
+        <a 
+        class="btn btn-primary" href="{% url 'problems:new_contestant' contest_id %}" role="button">Participate in contest
+        </a>
+
+{% endblock content %}

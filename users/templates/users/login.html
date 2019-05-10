@@ -1,0 +1,20 @@
+{% extends "problems/base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block header %}
+    <h2>Log in to your account.</h2>
+{% endblock header %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'users:login' %}" class="form">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+         <button type="submit" class="btn btn-primary">log in</button>
+        <input type="hidden" name="next" value="{% url 'problems:home' %}" />
+    </form>
+    
+{% endblock content %}

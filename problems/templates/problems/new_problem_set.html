@@ -1,0 +1,15 @@
+{% extends "problems/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h2><a href="{% url 'problems:contest' contest.id %}">{{ contest.name }}</a></h2>
+    <form action="{% url 'problems:new_problem_set' contest.id %}" method='post'>
+        {% csrf_token %}    
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary"> add problem to contest</button>
+    </form>
+
+    <ul>
+
+{% endblock content %}

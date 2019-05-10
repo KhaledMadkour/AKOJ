@@ -1,0 +1,25 @@
+{% extends "problems/base.html" %}
+
+
+{% block header %}
+    <h1>Teams</h1>
+{% endblock header %}
+
+{% block content %}
+    
+    <ul>
+        {% for team in teams %}
+            <li>
+                <h3>
+                    <a href="{% url 'problems:team' team.id %}">{{ team.name }}</a>
+                </h3>
+            </li>
+        {% empty %}
+            <li> No Teams </li>
+        {% endfor %}
+    </ul>
+    <a 
+        class="btn btn-primary" href="{% url 'problems:new_team'%}" role="button">create a team
+    </a>
+
+{% endblock content %}

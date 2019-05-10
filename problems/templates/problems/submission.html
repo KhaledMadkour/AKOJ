@@ -1,0 +1,15 @@
+{% extends "problems/base.html" %}
+
+{% block header %}
+	<h2 class="font-weight-bold">{{ submission.id }} , {{submission.Verdict}} </h2>
+    <p>by : {{ submission.contestant.team }}</p>	 
+    <p >Time : {{ submission.Time }}  , Memory : {{ submission.Memory }}  </p>
+    
+{% endblock header %}
+
+
+{% block content %}
+	    <h3> Code </h3>
+	    <p>{{ submission.Code }} </p>
+
+{% endblock content %}

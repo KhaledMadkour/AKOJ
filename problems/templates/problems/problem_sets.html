@@ -1,0 +1,25 @@
+{% extends "problems/base.html" %}
+
+
+{% block header %}
+    <h1>problem sets</h1>
+{% endblock header %}
+
+{% block content %}
+    
+    <ul>
+        {% for problemset in problem_sets %}
+            <li>
+                <h3>
+                    {{ problemset }}
+                </h3>
+            </li>
+        {% empty %}
+            <li> No problem sets have been added yet.</li>
+        {% endfor %}
+    </ul>
+        <a 
+        class="btn btn-primary" href="{% url 'problems:new_problem_set' contest_id %}" role="button">Add problem set
+    </a>
+    
+{% endblock content %}

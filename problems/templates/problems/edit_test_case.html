@@ -1,0 +1,16 @@
+{% extends "problems/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <p><a href="{% url 'problems:problem_view' problem_obj.id %}">{{ problem_obj }}</a></p>
+    
+    <p>Edit TestCase:</p>
+    
+    <form action="{% url 'problems:edit_test_case' test_case_obj.id %}" method='post'>
+        {% csrf_token %}    
+        {{ form|crispy }}
+       <button type="submit" class="btn btn-primary">save changes</button>
+    </form>
+
+{% endblock content %}

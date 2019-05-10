@@ -1,0 +1,27 @@
+{% extends "problems/base.html" %}
+
+
+{% block header %}
+    <h1>Problems</h1>
+{% endblock header %}
+
+{% block content %}
+    
+    <ul>
+        {% for problem in problems_obj %}
+            <li>
+                <h3>
+                    <a href="{% url 'problems:problem_view' problem.id %}">{{ problem.Problem_Name }}</a>
+                </h3>
+            </li>
+        {% empty %}
+            <li> No problems have been added yet.</li>
+        {% endfor %}
+    </ul>
+    <a 
+        class="btn btn-primary" href="{% url 'problems:new_problem' %}" role="button">Add new Problem
+    </a>
+           
+
+    
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "problems/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block header %}
+    
+{% endblock header %}
+
+{% block content %}
+	{% if not new_team_id %}
+	<h2>create A team</h2>
+    <form action="{% url 'problems:new_team' %}" method='post'>
+        {% csrf_token %}    
+        {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Create Team</button>
+    </form>
+    {% else %}
+    	<h3> Members </h3>
+    <ul>
+        {% for member in members %}
+            <li>
+                <h3>
+                    {{ member }}
+                </h3>
+            </li>
+        {% empty %}
+            <li> No Members in Team </li>
+        {% endfor %}
+    </ul>
+
+
+    	<h3> Username: </h3>
+		<form method="POST" action="{% url 'problems:search' new_team_id %}">
+		{% csrf_token %}
+		<input type="text" name="textfield">
+
+		<button type="submit" class="btn btn-primary">add member</button>
+		</form>
+    	<a 
+    </a>
+    {% endif %}
+{% endblock content %}
