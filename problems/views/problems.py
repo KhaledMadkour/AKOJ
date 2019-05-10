@@ -254,9 +254,8 @@ def new_contestant(request , contest_id):
 def submissions(request , contest_id):
     """show all submissions"""
     contestants = Contestant.objects.filter(contest = contest_id)
-    q = Submission.objects.none()
-    for c in contestants:
-        q |= Submission.objects.filter(contestant = c).order_by('date_added')
+    q = Submission.objects.filter(contestant__in = contestants).order_by('date_added')
+
     submission_table = SubmissionTable(q)
     context = {'submission_table' : submission_table , 'q' : q}
     return render(request, 'problems/submissions.html', context)
